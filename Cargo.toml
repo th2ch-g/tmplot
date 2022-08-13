@@ -1,0 +1,16 @@
+[package]
+name = "tmplot"
+version = "0.1.0"
+edition = "2021"
+authors = ["th 2022"]
+description = "Plotter for when you just want to draw a little diagram. \nFile and PIPE input are supported.\nAlso supports PNG, JPG output. Default output format is PNG."
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+clap = { version = "*", features = ["derive"] }
+plotters = "*"
+
+[profile.release]
+lto = true
+opt-level = 3
