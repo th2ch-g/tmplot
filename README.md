@@ -2,8 +2,14 @@
 
 Plotter for when you just want to draw a little diagram.  
 File and PIPE input are supported.  
-Also supports PNG, JPG output. Default output format is PNG.  
+Also supports PNG, JPG output. Default output format is PNG.
 
+## Install tmplot
+~~~
+git clone https://github.com/th2ch-g/tmplot.git && \
+cd ./tmplot && \
+cargo build --release
+~~~
 
 ## Quick start & Examples
 ### Ex1. PIPE & prefix, xlabel, ylabel, title input
