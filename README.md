@@ -5,11 +5,23 @@ File and PIPE input are supported.
 Also supports PNG, JPG output. Default output format is PNG.
 
 ## Install tmplot
+
+There are 2 ways to install.
+
+### 1. Install by cargo
+~~~
+cargo install --git https://github.com/th2ch-g/tmplot.git
+~~~
+The executable file is in `~/.cargo/bin/tmplot`
+
+### 2. Install from source
 ~~~
 git clone https://github.com/th2ch-g/tmplot.git && \
 cd ./tmplot && \
 cargo build --release
 ~~~
+The executable file is in `./target/release/tmplot`
+
 
 ## Quick start & Examples
 ### Ex1. PIPE & prefix, xlabel, ylabel, title input
