@@ -26,7 +26,8 @@ The executable file is in `./target/release/tmplot`
 ## Quick start & Examples
 ### Ex1. PIPE & prefix, xlabel, ylabel, title input
 ~~~
-$ for i in {0..10}; do echo ""; done | awk '{print rand(), rand()}' | tmplot plot -x - -y - --prefix random_number --xlabel rand1 --ylabel rand2 --title rand_number
+$ for i in {0..10}; do echo ""; done | awk '{print rand(), rand()}' | \
+    tmplot plot -x - -y - --prefix random_number --xlabel rand1 --ylabel rand2 --title rand_number
 
 [INFO] Plot mode execute...
 [INFO] PIPE data seems to be SPACE split
@@ -39,7 +40,9 @@ Then you can get a figure like the one below
 
 ### Ex2. PIPE & FILE & JPG output
 ~~~
-$ for i in {0..10}; do echo ""; done | awk '{print rand()}' > test.txt && for i in {0..10}; do echo ""; done | awk '{print rand()}' | tmplot scatter -x - -y test.txt --jpg && rm -f test.txt
+$ for i in {0..10}; do echo ""; done | awk '{print rand()}' > test.txt && \
+    for i in {0..10}; do echo ""; done | awk '{print rand()}' | \
+    tmplot scatter -x - -y test.txt --jpg && rm -f test.txt
 
 [INFO] Plot mode execute...
 [INFO] tmplot done
