@@ -1,4 +1,5 @@
 # tmplot
+# [RECOMMEND] [tmplot.py](https://github.com/th2ch-g/tmplot.py) is more highly functional
 
 Plotter for when you just want to draw a little diagram.  
 File and PIPE input are supported.  
