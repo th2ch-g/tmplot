@@ -46,3 +46,7 @@ $ head -n 5 sample.txt | awk '{print $2}'
 $ cat sample.txt | awk '{print $2}' | tmplot hist -f -
 ~~~
 
+## Other projects
+- [pipeplot](https://github.com/MyGodIsHe/pipeplot)
+- [pipePlot](https://github.com/EvolBioInf/pipePlot)
+
