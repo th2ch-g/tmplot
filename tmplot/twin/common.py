@@ -6,6 +6,7 @@ from dataclasses import dataclass
 import matplotlib
 import numpy as np
 from matplotlib import pyplot as plt
+from typing import List
 
 from ..logger import generate_logger
 from ..util import data_parse, make_dist, range_parse
@@ -28,6 +29,7 @@ class CommonPlotter(metaclass=ABCMeta):
     ax2: matplotlib.axes._axes.Axes = None
     ax2_2: matplotlib.axes._axes.Axes = None
     ax3: matplotlib.axes._axes.Axes = None
+    labels: List[str] = None
 
     @abstractmethod
     def run(self) -> None:
@@ -93,8 +95,15 @@ class CommonPlotter(metaclass=ABCMeta):
             self.ax2_2.set_ylim(self.ymin, self.ymax)
             self.ax3.set_ylim(self.ymin, self.ymax)
 
+        # label
+        self.labels = self.args.labels
+        if self.labels is not None:
+            assert len(self.labels) == 2
+
     def save(self) -> None:
         self.fig.tight_layout()
+        if self.labels is not None:
+            self.ax2.legend()
         if self.args.out is not None:
             plt.savefig(self.args.out)
             LOGGER.info(f"figure name is {self.args.out}")

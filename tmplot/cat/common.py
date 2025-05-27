@@ -27,6 +27,7 @@ class CommonPlotter(metaclass=ABCMeta):
     fig: matplotlib.figure.Figure = None
     ax1: matplotlib.axes._axes.Axes = None
     ax2: matplotlib.axes._axes.Axes = None
+    labels: List[str] = None
 
     @abstractmethod
     def run(self) -> None:
@@ -80,8 +81,15 @@ class CommonPlotter(metaclass=ABCMeta):
             self.ax1.set_ylim(self.ymin, self.ymax)
             self.ax2.set_ylim(self.ymin, self.ymax)
 
+        # labels
+        if self.args.labels is not None:
+            self.labels = self.args.labels
+            assert len(self.labels) == len(self.data)
+
     def save(self) -> None:
         self.fig.tight_layout()
+        if self.labels is not None:
+            self.ax1.legend()
         if self.args.out is not None:
             plt.savefig(self.args.out)
             LOGGER.info(f"figure name is {self.args.out}")

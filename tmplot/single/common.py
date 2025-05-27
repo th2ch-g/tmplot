@@ -25,6 +25,7 @@ class CommonPlotter(metaclass=ABCMeta):
     ymax: float = None
     fig: matplotlib.figure.Figure = None
     ax: matplotlib.axes._axes.Axes = None
+    label: str = None
 
     @abstractmethod
     def run(self) -> None:
@@ -62,8 +63,13 @@ class CommonPlotter(metaclass=ABCMeta):
             LOGGER.info(f"ylim: {self.ymin}:{self.ymax}")
             plt.ylim(self.ymin, self.ymax)
 
+        # label
+        self.label = self.args.label
+
     def save(self) -> None:
         self.fig.tight_layout()
+        if self.label is not None:
+            self.ax.legend()
         if self.args.out is not None:
             plt.savefig(self.args.out)
             LOGGER.info(f"figure name is {self.args.out}")

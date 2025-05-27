@@ -47,6 +47,7 @@ def add_single_data_option(args: argparse.ArgumentParser):
                 If you want to use pipe input, use "-f -"',
     )
     args.add_argument("-d", "--delimiter", type=str, help="[default: ' ']")
+    args.add_argument("-l", "--label", type=str, help="legend label")
 
 
 def add_multi_data_option(args: argparse.ArgumentParser):
@@ -59,6 +60,20 @@ def add_multi_data_option(args: argparse.ArgumentParser):
         help='input several data file, but "-f -" cannot be used',
     )
     args.add_argument("-d", "--delimiter", type=str, help="[default: ' ']")
+    args.add_argument("-l", "--labels", type=str, nargs="*", help="legend labels")
+
+
+def add_multi_twin_data_option(args: argparse.ArgumentParser):
+    args.add_argument(
+        "-f",
+        "--file",
+        type=str,
+        required=True,
+        help='input file must be space speparate file. \
+                If you want to use pipe input, use "-f -"',
+    )
+    args.add_argument("-d", "--delimiter", type=str, help="[default: ' ']")
+    args.add_argument("-l", "--labels", type=str, nargs="*", help="legend labels")
 
 
 def cli() -> None:
@@ -128,13 +143,13 @@ def cli() -> None:
 
     # twin plot
     parser_twin_plot = parser_twin_sub.add_parser("plot", help="twin plot")
-    add_single_data_option(parser_twin_plot)
+    add_multi_twin_data_option(parser_twin_plot)
     add_common_figure_option(parser_twin_plot)
     add_hist_option(parser_twin_plot)
 
     # twin scatter
     parser_twin_scatter = parser_twin_sub.add_parser("scatter", help="twin plot")
-    add_single_data_option(parser_twin_scatter)
+    add_multi_twin_data_option(parser_twin_scatter)
     add_common_figure_option(parser_twin_scatter)
     add_hist_option(parser_twin_scatter)
 
