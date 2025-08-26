@@ -1,5 +1,6 @@
 import argparse
 import sys
+from importlib import metadata
 
 from .cat.hist import Hist as CatHist
 from .cat.plot import Plot as CatPlot
@@ -12,6 +13,13 @@ from .twin.plot import Plot as TwinPlot
 from .twin.scatter import Scatter as TwinScatter
 
 LOGGER = generate_logger(__name__)
+
+
+def get_version():
+    try:
+        return metadata.version("tmplot")
+    except metadata.PackageNotFoundError:
+        return "unknown"
 
 
 def add_common_figure_option(args: argparse.ArgumentParser):
@@ -83,6 +91,14 @@ def cli() -> None:
             "tmplot: One liner Plotter \
                     that supports file and pipe input for quick visualization"
         )
+    )
+
+    parser.add_argument(
+        "-V",
+        "--version",
+        action="version",
+        version=f"%(prog)s {get_version()}",
+        help="Print version",
     )
 
     # subcommands
