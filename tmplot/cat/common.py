@@ -91,7 +91,7 @@ class CommonPlotter(metaclass=ABCMeta):
         if self.labels is not None:
             self.ax1.legend()
         if self.args.out is not None:
-            plt.savefig(self.args.out)
+            plt.savefig(self.args.out, dpi=300)
             LOGGER.info(f"figure name is {self.args.out}")
         else:
             LOGGER.info("No file output. Will use additional window")
