@@ -8,8 +8,8 @@ class Hist(CommonPlotter):
     def run(self) -> None:
         if self.args.labels is None:
             for data in self.data:
-                self.ax1.hist(data[:, 0])
+                self.ax1.hist(data)
         else:
             for data, label in zip(self.data, self.labels):
-                self.ax1.hist(data[:, 0], label=label)
+                self.ax1.hist(data, label=label)
         self.save()

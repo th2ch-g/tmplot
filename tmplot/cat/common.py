@@ -39,6 +39,9 @@ class CommonPlotter(metaclass=ABCMeta):
         if sys.argv[1] in ["plot", "scatter"]:
             for data in self.data:
                 assert data.shape[1] == 2, "data shape must be (N, 2)"
+        elif sys.argv[1] == "hist":
+            for data in self.data:
+                assert data.shape[1] == 1, "data shape must be (N, )"
         LOGGER.info("data_parse finished")
 
         # figsize
@@ -59,7 +62,7 @@ class CommonPlotter(metaclass=ABCMeta):
         # hist plot
         hist_data = []
         for data in self.data:
-            for d in data[:, 1]:
+            for d in data:
                 hist_data.append(d)
         ydata, xdata = make_dist(hist_data, self.args.binsize)
         self.ax2.plot(xdata, ydata)
