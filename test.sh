@@ -1,5 +1,5 @@
 #!/bin/bash
-set -e
+set -eux
 
 uv --version
 tmplot="uv run python3 -m tmplot"

@@ -26,6 +26,7 @@ class CommonPlotter(metaclass=ABCMeta):
     fig: matplotlib.figure.Figure = None
     ax: matplotlib.axes._axes.Axes = None
     label: str = None
+    use_hist_idx: int = None
 
     @abstractmethod
     def run(self) -> None:
@@ -37,8 +38,10 @@ class CommonPlotter(metaclass=ABCMeta):
         if sys.argv[1] in ["plot", "scatter"]:
             assert self.data.shape[1] == 2, "data shape must be (N, 2)"
         elif sys.argv[1] in ["hist"]:
-            assert self.data.ndim == 1, "data shape must be (N, )"
+            self.use_hist_idx = self.args.use_hist_idx
+        #     assert self.data.ndim == 1, "data shape must be (N, )"
         LOGGER.info("data_parse finished")
+
 
         # figsize
         self.fig_width, self.fig_height = range_parse(self.args.figsize)

@@ -6,10 +6,16 @@ from .common import CommonPlotter
 @dataclass
 class Hist(CommonPlotter):
     def run(self) -> None:
-        if self.args.labels is None:
-            for data in self.data:
-                self.ax1.hist(data)
+        if self.data[0].ndim == 1:
+            data = self.data
         else:
-            for data, label in zip(self.data, self.labels):
-                self.ax1.hist(data, label=label)
+            data = []
+            for d in self.data:
+                data.append(d[:, self.use_hist_idx])
+        if self.args.labels is None:
+            for d in data:
+                self.ax1.hist(d)
+        else:
+            for d, label in zip(data, self.labels):
+                self.ax1.hist(d, label=label)
         self.save()

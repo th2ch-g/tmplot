@@ -28,6 +28,7 @@ class CommonPlotter(metaclass=ABCMeta):
     ax1: matplotlib.axes._axes.Axes = None
     ax2: matplotlib.axes._axes.Axes = None
     labels: List[str] = None
+    use_hist_idx: int = None
 
     @abstractmethod
     def run(self) -> None:
@@ -36,12 +37,13 @@ class CommonPlotter(metaclass=ABCMeta):
     def __post_init__(self) -> None:
         # data
         self.data = data_parse_multi(self.args.files, self.args.delimiter)
-        if sys.argv[1] in ["plot", "scatter"]:
+        if sys.argv[2] in ["plot", "scatter"]:
             for data in self.data:
                 assert data.shape[1] == 2, "data shape must be (N, 2)"
-        elif sys.argv[1] == "hist":
-            for data in self.data:
-                assert data.shape[1] == 1, "data shape must be (N, )"
+        elif sys.argv[2] == "hist":
+            self.use_hist_idx = self.args.use_hist_idx
+        #     for data in self.data:
+        #         assert data.shape[1] == 1, "data shape must be (N, )"
         LOGGER.info("data_parse finished")
 
         # figsize
@@ -62,8 +64,12 @@ class CommonPlotter(metaclass=ABCMeta):
         # hist plot
         hist_data = []
         for data in self.data:
-            for d in data:
-                hist_data.append(d)
+            if sys.argv[2] in ["plot", "scatter"]:
+                for d in data[:, 1]:
+                    hist_data.append(d)
+            elif sys.argv[2] == "hist":
+                for d in data[:, self.use_hist_idx]:
+                    hist_data.append(d)
         ydata, xdata = make_dist(hist_data, self.args.binsize)
         self.ax2.plot(xdata, ydata)
 

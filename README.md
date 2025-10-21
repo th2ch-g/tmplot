@@ -47,6 +47,7 @@ $ cat sample.txt | awk '{print $2}' | tmplot hist -f -
 ~~~
 
 ## Other projects
+- [gnuplot](http://www.gnuplot.info/)
 - [pipeplot](https://github.com/MyGodIsHe/pipeplot)
 - [pipePlot](https://github.com/EvolBioInf/pipePlot)
 

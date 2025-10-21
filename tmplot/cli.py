@@ -43,7 +43,7 @@ def add_common_figure_option(args: argparse.ArgumentParser):
 
 def add_hist_option(args: argparse.ArgumentParser):
     args.add_argument("--binsize", type=int, default=100, help="[default: 100]")
-
+    args.add_argument("--use_hist_idx", type=int, default=0, help="[default: 0]")
 
 def add_single_data_option(args: argparse.ArgumentParser):
     args.add_argument(
